@@ -188,7 +188,7 @@ public final class CommonChecks {
    *   <li>it is a {@link File} containing at least one non-whitespace character.
    *      Consequently, this check could be expensive if the argument is a large
    *      {@code File}. Also note that this check will not verify that the file
-   *      exists in the first place. If in doubt, execute the {@link #regularFile()} check
+   *      exists in the first place. If in doubt, execute the {@link #file()} check
    *      first.
    *   <li>it is a non-null object of any other type
    * </ul>
@@ -238,13 +238,15 @@ public final class CommonChecks {
   }
 
   /**
-   * Verifies that the argument is an array or an array <i>type</i>.
+   * Verifies that the argument either is an array <i>object</i> or an array <i>type</i>.
    *
    * <blockquote><pre>{@code
-   * Object obj = new int[] {1, 2, 3, 4, 5};
-   * Check.that(obj).is(array());             // OK
-   * Check.that(obj.getClass()).is(array());  // OK
-   * Check.that("foo").is(array());           // IllegalArgumentException
+   * Object array = new int[] {1, 2, 3, 4, 5};
+   * Check.that(array).is(array());             // true
+   * Check.that(int[].class).is(array());       // true
+   * Check.that(Employee[].class).is(array());  // true
+   * Check.that(new Employee()).is(array());    // false
+   * Check.that("foo").is(array());             // false
    * }</pre></blockquote>
    *
    * @param <T> the type of the argument
@@ -257,16 +259,11 @@ public final class CommonChecks {
   }
 
   /**
-   * Verifies that the argument is an existing, regular file. NB To verify that a path <i>string</i> is valid,
-   * execute:
-   *
-   * <blockquote><pre>{@code
-   * Check.that(path).has(File::new, regularFile());
-   * }</pre></blockquote>
+   * Verifies that the argument is an existing, regular file.
    *
    * @return a function implementing the test described above
    */
-  public static ComposablePredicate<File> regularFile() {
+  public static ComposablePredicate<File> file() {
     return f -> Files.isRegularFile(f.toPath());
   }
 
@@ -289,19 +286,19 @@ public final class CommonChecks {
   }
 
   /**
-   * Verifies that the specified file is present on the file system. Equivalent to
+   * Verifies that the specified file, directory or symbolic link is present on the file system. Equivalent to
    * {@link File#exists() File::exists}.
    *
    * <blockquote><pre>{@code
-   * // import static org.klojang.CommonChecks.fileExists;
+   * // import static org.klojang.CommonChecks.onFileSystem;
    * // import static org.klojang.CommonExceptions.fileNotFound;
-   * Check.that(file).is(fileExists(), fileNotFound(file));
+   * Check.that(file).is(onFileSystem(), fileNotFound(file));
    * }</pre></blockquote>
    *
    * @return a function implementing the test described above
    * @see CommonExceptions#fileNotFound(File)
    */
-  public static ComposablePredicate<File> fileExists() {
+  public static ComposablePredicate<File> onFileSystem() {
     return File::exists;
   }
 

@@ -350,19 +350,19 @@ public class CommonChecksTest {
   }
 
   @Test
-  public void regularFile00() throws IOException {
+  public void file00() throws IOException {
     File f = File.createTempFile("foo" + millis(), null);
     try {
-      Check.that(f).is(regularFile());
+      Check.that(f).is(file());
     } finally {
       f.delete();
     }
-    Check.that(f).isNot(regularFile());
+    Check.that(f).isNot(file());
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void regularFile01() {
-    Check.that(new File("/-/-/*.bar/" + millis())).is(regularFile());
+  public void file01() {
+    Check.that(new File("/-/-/*.bar/" + millis())).is(file());
   }
 
   @Test

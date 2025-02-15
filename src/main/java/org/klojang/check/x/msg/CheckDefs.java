@@ -52,10 +52,10 @@ public final class CheckDefs {
     setMetadata(plainInt(), msgPlainInt(), "plainInt");
     setMetadata(plainShort(), msgPlainShort(), "plainShort");
     setMetadata(array(), msgArray(), "array");
-    setMetadata(regularFile(), msgRegularFile(), "regularFile");
+    setMetadata(file(), msgFile(), "file");
     setMetadata(directory(), msgDirectory(), "directory");
     setMetadata(symlink(), msgSymlink(), "symlink");
-    setMetadata(fileExists(), msgFileExists(), "fileExists");
+    setMetadata(onFileSystem(), msgFileExists(), "fileExists");
     setMetadata(readable(), msgReadable(), "readable");
     setMetadata(writable(), msgWritable(), "writable");
     setMetadata(present(), msgPresent(), "present");

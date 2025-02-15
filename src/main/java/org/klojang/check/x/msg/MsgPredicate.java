@@ -96,16 +96,16 @@ final class MsgPredicate {
     //@formatter:on
   }
 
-  static PrefabMsgFormatter msgRegularFile() {
+  static PrefabMsgFormatter msgFile() {
     return x -> x.negated()
-        ? x.name() + " must not be an existing, regular file (was " + x.arg() + ')'
-        : "no such file: " + x.arg();
+        ? x.name() + " must not be an existing file (was " + x.arg() + ')'
+        : "missing file: " + x.arg();
   }
 
   static PrefabMsgFormatter msgDirectory() {
     return x -> x.negated()
         ? x.name() + " must not be an existing directory (was " + x.arg() + ')'
-        : "no such directory: " + x.arg();
+        : "missing directory: " + x.arg();
   }
 
   static PrefabMsgFormatter msgSymlink() {

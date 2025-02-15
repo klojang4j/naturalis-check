@@ -378,26 +378,24 @@ public class MsgPredicateTest {
   }
 
   @Test
-  public void file01() throws IOException {
+  public void file01() {
     File f = Path.of("bla", "bla", "bar.Φ").toFile();
     try {
-      Check.that(f, "lithium").is(regularFile());
+      Check.that(f, "lithium").is(file());
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
-      assertEquals("no such file: bla/bla/bar.Φ", e.getMessage());
+      assertEquals("missing file: bla/bla/bar.Φ", e.getMessage());
       return;
-    } finally {
-      f.delete();
     }
     fail();
   }
 
   @Test
-  public void fileExists00() throws IOException {
+  public void fileExists00() {
     Path p = Path.of("bla", "foo", "bla", "bar");
     File file = p.toFile();
     try {
-      Check.that(file, "xenon").is(fileExists());
+      Check.that(file, "xenon").is(onFileSystem());
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
       assertEquals("file not found: bla/foo/bla/bar", e.getMessage());
@@ -410,7 +408,7 @@ public class MsgPredicateTest {
   public void fileExists01() throws IOException {
     File f = File.createTempFile("foo234", null);
     try {
-      Check.that(f, "xenon").isNot(fileExists());
+      Check.that(f, "xenon").isNot(onFileSystem());
     } finally {
       f.delete();
     }

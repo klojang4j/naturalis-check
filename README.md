@@ -59,7 +59,7 @@ To use _Klojang Check_, add the following dependency to your Maven POM file:
 <dependency>
     <groupId>org.klojang</groupId>
     <artifactId>klojang-check</artifactId>
-    <version>21.2.0</version>
+    <version>21.3.0</version>
 </dependency>
 ```
 
@@ -67,7 +67,7 @@ or Gradle build script:
 
 ```
 dependencies {
-    implementation 'org.klojang:klojang-check:21.2.0'
+    implementation 'org.klojang:klojang-check:21.3.0'
 }
 ```
 
